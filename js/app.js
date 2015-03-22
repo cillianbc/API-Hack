@@ -1,5 +1,7 @@
-// Specify your actual API key here:
 var API_KEY = 'AIzaSyDfytDoXF01OD9LrVti-BukQjNjxlj2u_I';
+var API_URL = 'https://www.googleapis.com/pagespeedonline/v2/runPagespeed?';
+var CHART_API_URL = 'http://chart.apis.google.com/chart?';
+
 $(document).ready( function() {
 	$('.website').submit( function(event){
 		// zero out results if previous search has run
@@ -9,17 +11,6 @@ $(document).ready( function() {
         runPagespeed(URL_TO_GET_RESULTS_FOR);
 	});
 });
-$(document).ready( function() {
-	$('.website').submit( function(event){
-		// zero out results if previous search has run
-		$('.results').html('');
-		// get the value of the tags the user submitted
-		var URL_TO_GET_RESULTS_FOR = $(this).find("input[name='website']").val();
-	});
-});
-
-var API_URL = 'https://www.googleapis.com/pagespeedonline/v2/runPagespeed?';
-var CHART_API_URL = 'http://chart.apis.google.com/chart?';
 
 // Object that will hold the callbacks that process results from the
 // PageSpeed Insights API.
@@ -65,6 +56,19 @@ function runPagespeedCallbacks(result) {
   }
 }
 
+callbacks.displayTopPageSpeedSuggestions = function(result) {
+  var results = [];
+  var score = result.ruleGroups.SPEED.score;
+  var ruleResults = result.formattedResults.ruleResults;
+  for (var i in ruleResults) {
+    var ruleResult = ruleResults[i];
+      if (ruleResult.ruleImpact < 1.0) continue;
+      results.push({name: ruleResult.localizedRuleName,
+                  impact: ruleResult.ruleImpact});
+  };
+  for (each in results){
+    console.log(results[each].name,results[each].impact);}
+};
 // Invoke the callback that fetches results. Async here so we're sure
 // to discover any callbacks registered below, but this can be
 // synchronous in your code.
