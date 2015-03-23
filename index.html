@@ -11,19 +11,57 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
   <!-- custom css styles -->
   <link rel="stylesheet" href="css/style.css">
 
   <!-- custom javascript -->
   <script src="js/app.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>API HACk</title>
 </head>
 <body>
-  <form class="website" onsubmit="return false;">
-    <input type="text" placeholder='Website you want to test' name="website" size="30" autofocus required>
-    <input type="submit" value="Submit">
-  </form>
-  <div class="results"></div>
+  <div class="container-fluid">
+    <div class="header row">
+      <div class="col-lg-3 col-md-3"></div>
+      <div class="col-lg-6 col-md-3">
+       <h2>Just how fast is your website?</h2>
+        <form class="website" onsubmit="return false;">
+        <input type="text" placeholder='Website you want to test' name="website" size="30" autofocus required>
+        <input type="submit" value="Submit">
+        </form>
+      </div>
+      <div class="col-lg-3 col-md-3"></div>
+    </div>
+    <div class="display row">
+      <div class="col-lg-3 col-md-3">
+      </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-xs-3">
+                  <i class="fa fa-sliders fa-5x"></i>
+                </div>
+                <div class="col-xs-9 text-right">
+                  <div class="huge">26</div>
+                  <div>Out of 100</div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-footer">
+              <span class="pull-left">Want to see how to improve your score? <a class="details">View Details</a></span>
+              <div class="clearfix"></div>
+              <div class="results">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3">
+        </div>
+    </div>
+  </div>
 </body>
 </html>

@@ -59,6 +59,7 @@ function runPagespeedCallbacks(result) {
 callbacks.displayTopPageSpeedSuggestions = function(result) {
   var results = [];
   var score = result.ruleGroups.SPEED.score;
+  $('.huge').text(score);
   var ruleResults = result.formattedResults.ruleResults;
   for (var i in ruleResults) {
     var ruleResult = ruleResults[i];
@@ -67,8 +68,13 @@ callbacks.displayTopPageSpeedSuggestions = function(result) {
                   impact: ruleResult.ruleImpact});
   };
   for (each in results){
+    $('.results').append('<h2>'+results[each].name+'</h2><li>'+results[each].impact+'</li>');
     console.log(results[each].name,results[each].impact);}
+  $('.details').click(function(){
+    $('.results').slideToggle("slow");
+  });
 };
+
 // Invoke the callback that fetches results. Async here so we're sure
 // to discover any callbacks registered below, but this can be
 // synchronous in your code.
