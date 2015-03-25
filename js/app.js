@@ -2,15 +2,15 @@ var API_KEY = 'AIzaSyDfytDoXF01OD9LrVti-BukQjNjxlj2u_I';
 var API_URL = 'https://www.googleapis.com/pagespeedonline/v2/runPagespeed?';
 var CHART_API_URL = 'http://chart.apis.google.com/chart?';
 
-$(document).ready( function() {
-	$('.website').submit( function(event){
-		// zero out results if previous search has run
+var getURL =function(){
+  $('.website').submit( function(event){
+    // zero out results if previous search has run
 		$('.results').html('');
 		// get the value of the tags the user submitted
 		var URL_TO_GET_RESULTS_FOR = $(this).find("input[name='website']").val();
         runPagespeed(URL_TO_GET_RESULTS_FOR);
 	});
-});
+                          };
 
 // Object that will hold the callbacks that process results from the
 // PageSpeed Insights API.
@@ -64,12 +64,11 @@ callbacks.displayTopPageSpeedSuggestions = function(result) {
   for (var i in ruleResults) {
     var ruleResult = ruleResults[i];
       if (ruleResult.ruleImpact < 1.0) continue;
-      results.push({name: ruleResult.localizedRuleName,
-                  impact: ruleResult.ruleImpact});
+      results.push({name: ruleResult.localizedRuleName});
   };
   for (each in results){
-    $('.results').append('<h2>'+results[each].name+'</h2><li>'+results[each].impact+'</li>');
-    console.log(results[each].name,results[each].impact);}
+    $('.results').append('<h2>'+results[each].name+'</h2>');
+    console.log(results[each].name);}
   $('.details').click(function(){
     $('.results').slideToggle("slow");
   });
@@ -79,3 +78,4 @@ callbacks.displayTopPageSpeedSuggestions = function(result) {
 // to discover any callbacks registered below, but this can be
 // synchronous in your code.
 setTimeout(runPagespeed, 0);
+getURL();

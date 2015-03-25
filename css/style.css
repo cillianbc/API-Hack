@@ -15,6 +15,7 @@
 }
 
 .results{
+display: none;
 }
 .huge {
     font-size: 40px;
