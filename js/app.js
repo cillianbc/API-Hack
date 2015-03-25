@@ -63,12 +63,14 @@ callbacks.displayTopPageSpeedSuggestions = function(result) {
   var ruleResults = result.formattedResults.ruleResults;
   for (var i in ruleResults) {
     var ruleResult = ruleResults[i];
+    var summary = ruleResults[i].summary;
       if (ruleResult.ruleImpact < 1.0) continue;
-      results.push({name: ruleResult.localizedRuleName});
+      results.push({name: ruleResult.localizedRuleName,
+                   summary:summary});
   };
   for (each in results){
-    $('.results').append('<h2>'+results[each].name+'</h2>');
-    console.log(results[each].name);}
+    $('.results').append('<h3>'+results[each].name+'</h3>');
+    console.log(results[each].name,results[each].summary);}
   $('.details').click(function(){
     $('.results').slideToggle("slow");
   });
