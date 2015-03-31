@@ -1,6 +1,5 @@
 var API_KEY = 'AIzaSyDfytDoXF01OD9LrVti-BukQjNjxlj2u_I';
 var API_URL = 'https://www.googleapis.com/pagespeedonline/v2/runPagespeed?';
-var CHART_API_URL = 'http://chart.apis.google.com/chart?';
 
 var getURL =function(){
   $('.website').submit( function(event){
@@ -65,12 +64,21 @@ callbacks.displayTopPageSpeedSuggestions = function(result) {
     var ruleResult = ruleResults[i];
     var summary = ruleResults[i].summary;
       if (ruleResult.ruleImpact < 1.0) continue;
-      results.push({name: ruleResult.localizedRuleName,
-                   summary:summary});
+      results.push({name: ruleResult.localizedRuleName});
   };
   for (each in results){
     $('.results').append('<h3>'+results[each].name+'</h3>');
-    console.log(results[each].name,results[each].summary);}
+    if (results[each].name === "Leverage browser caching")
+      $('.results').append('<p><a href="https://developers.google.com/speed/docs/insights/LeverageBrowserCaching">Learn How</a><p>');
+    else if(results[each].name === "Reduce server response time")
+      $('.results').append('<p><a href="https://developers.google.com/speed/docs/insights/Server">Learn How</a><p>');
+    else if(results[each].name === "Minify JavaScript" || results[each].name === "Minify CSS")
+      $('.results').append('<p><a href="https://developers.google.com/speed/docs/insights/MinifyResources">Learn How</a><p>');
+    else if(results[each].name === "Eliminate render-blocking JavaScript and CSS in above-the-fold content")
+      $('.results').append('<p><a href="https://developers.google.com/speed/docs/insights/BlockingJS">Learn How</a><p>');
+    if (results[each].name === "Optimize images")
+      $('.results').append('<p><a href="https://developers.google.com/speed/docs/insights/OptimizeImages">Learn How</a><p>');
+  }
   $('.details').click(function(){
     $('.results').slideToggle("slow");
   });
