@@ -1,6 +1,5 @@
 var API_KEY = 'AIzaSyDfytDoXF01OD9LrVti-BukQjNjxlj2u_I';
 var API_URL = 'https://www.googleapis.com/pagespeedonline/v2/runPagespeed?';
-
 var getURL =function(){
   $('.website').submit( function(event){
     // zero out results if previous search has run
@@ -9,7 +8,7 @@ var getURL =function(){
 		var URL_TO_GET_RESULTS_FOR = $(this).find("input[name='website']").val();
         runPagespeed(URL_TO_GET_RESULTS_FOR);
 	});
-                          };
+  };
 
 // Object that will hold the callbacks that process results from the
 // PageSpeed Insights API.
@@ -79,13 +78,14 @@ callbacks.displayTopPageSpeedSuggestions = function(result) {
     if (results[each].name === "Optimize images")
       $('.results').append('<p><a href="https://developers.google.com/speed/docs/insights/OptimizeImages">Learn How</a><p>');
   }
-  $('.details').click(function(){
-    $('.results').slideToggle("slow");
-  });
+  $('.panel-footer').css("display","block");
 };
 
 // Invoke the callback that fetches results. Async here so we're sure
 // to discover any callbacks registered below, but this can be
 // synchronous in your code.
-setTimeout(runPagespeed, 0);
-getURL();
+var slide = function(){$('.details').click(function(){
+    $('.results').slideToggle("slow");
+})};
+
+
