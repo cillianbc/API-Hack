@@ -130,6 +130,10 @@ input[type=text]{
   margin-top:3rem;
 }
 
+.footer{
+  background-color: gainsboro;
+}
 footer img {
-  margin: 0 auto;
+  float: left;
+  width:8rem;
 }
